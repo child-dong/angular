@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>过滤器</title>
+	<link rel="stylesheet" href="">
+	<script src="angular.min.js"></script>
+</head>
+<body>
+	<div ng-app="app" ng-controller="myCtrl">
+		<p>{{name | uppercase}}</p>
+		<p>{{age | currency}}</p>
+		<ul>
+			<li ng-repeat="i in array | filter:3">{{i}}</li>
+		</ul>
+		<p>{{str | reverse}}</p>
+		<p>{{array | sort}}</p>
+	</div>
+
+	<script>
+		var app= angular.module("app",[]).controller("myCtrl",function($scope){
+			$scope.name= "jack";
+			$scope.age= 18;
+			$scope.str= "asdhausd";
+			$scope.array= [3,2,5,1,4];
+		})
+		app.filter('reverse',function(){
+			return function(text){
+				return text.split("").reverse().join("");
+			}
+		})
+		app.filter('sort',function(){
+			return function(text){
+				return text.sort();
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>table</title>
+	<link rel="stylesheet" href="">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js">
+	</script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="bootbox.min.js"></script>
+	<style>
+		td,th{
+			width: 100px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+		<button ng-click="addTr()">增加</button>
+		<button ng-if="tdArray.length>=2" ng-click="delAll()">全部删除</button>
+		<table>
+			<thead>
+				<tr>
+					<th>1</th>
+					<th>2</th>
+					<th>3</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(index,i) in tdArray">
+					<td>
+						<select name="" id="">
+							<option value="">选择</option>
+							<option value="">{{i.name}}</option>
+						</select>
+					</td>
+					<td>
+						<select name="" id="">
+							<option value="">选择</option>
+
+							<option value="">{{i.age}}</option>
+						</select>
+					</td>
+					<td>
+						<select name="" id="">
+							<option value="">选择</option>
+
+							<option value="">{{i.sex}}</option>
+						</select>
+					</td>
+					<td><button ng-click="del(index)">删除</button></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<script>
+			var app = angular.module("myApp",[]);
+			app.controller("myCtrl",function($scope){
+				$scope.tdArray = [];
+				$scope.addTr = function(){
+					$scope.tdArray.push({name: 'jack',age:'18',sex: 'middle'})
+				};
+				$scope.del = function(index){
+					bootbox.confirm({
+				    size: 'small',
+				    message: 'Are you sure?',
+				    buttons: {
+			        confirm: {
+		            label: '确认',
+		            className: 'btn-success'
+			        },
+			        cancel: {
+		            label: '取消',
+		            className: 'btn-danger'
+			        }
+				    },
+				    callback: function (result) {
+			        if(result){
+			        	$scope.$apply(function(){
+			        		$scope.tdArray.splice(index,1)
+			        	})
+		        	}
+		        }
+					});
+				}
+				$scope.delAll = function(index){
+					bootbox.confirm({
+				    size: 'small',
+				    message: 'Are you sure?',
+				    buttons: {
+			        confirm: {
+		            label: '确认',
+		            className: 'btn-success'
+			        },
+			        cancel: {
+		            label: '取消',
+		            className: 'btn-danger'
+			        }
+				    },
+				    callback: function (result) {
+			        if(result){
+			        	$scope.$apply(function(){
+			        		$scope.tdArray.splice(index,$scope.tdArray.length)
+			        	})
+		        	}
+		        }
+					});
+				}
+			})
+		</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src="https://cdn.bootcss.com/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+	
+	<div ng-app="myApp" ng-controller="myCtrl" data-ng-init="secondName='aa';quant=1;count=5;person={a: 1,b:2}">
+		名: <input type="text" ng-model="firstName"><br>
+		姓: <input type="text" ng-model="lastName"><br>
+		<br>
+		姓名: {{firstName + " " + lastName}}
+		<p>{{secondName}}</p>
+		<p>{{5 + 5}}</p>
+		<p>总价：{{quant *  count}}</p>
+		<p>{{person.a}}</p>
+		<p>{{array[1]}}</p>
+		<p>{{array}}</p>
+		<ul>
+			<li ng-repeat="i in array">{{i}}</li>
+			<li ng-repeat="i in names">{{i.a + i.b}}</li>
+		</ul>
+		<button ng-click="show()">增加</button>
+		<p>{{num}}</p>
+		<input ng-list="separator">
+</div>
+
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope) {
+		    $scope.firstName= "John";
+		    $scope.lastName= "Doe";
+		    $scope.age= 18;
+		    $scope.array= [1,2,3,4,5];
+		    $scope.names= [{a:"aa",b:"bb"},{a:"cc",b:"dd"}];
+		    $scope.show= function(){
+		    	$scope.num= $scope.age 
+		    }
+		});
+	</script>
+</body>
+</html>
